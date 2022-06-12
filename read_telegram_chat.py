@@ -26,7 +26,7 @@ def get_tokens():
     list_of_tokens = []
 
 
-    with open("ук_messages_20220610T191535.json", 'r') as f:
+    with open("hff_messages_20220613T001044.json", 'r') as f:
         print(f.read())
         messages = json.load(f)
 
