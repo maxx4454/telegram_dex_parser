@@ -45,8 +45,9 @@ def process_token(token_inf):
 
 def real_main():
     # print(datetime.fromtimestamp(int(get_tokens()[0]['timestamp']) ).strftime('%Y-%m-%d %H:%M:%S'))
-    for token in get_tokens():
-        process_token(token)
+    tokens = get_tokens()
+    for i in range(281, len(tokens)):
+        process_token(tokens[i])
 
 
 itit()

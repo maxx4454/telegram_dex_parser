@@ -188,9 +188,12 @@ headers = {
 
 
 def get_liq_pool(contract):
-    contract = web3.toChecksumAddress(contract)
-    factory_contract = web3.eth.contract(address=contract, abi=factory_abi)
-    return factory_contract.functions.getReserves().call()[1] * 10 ** -18
+    try:
+        contract = web3.toChecksumAddress(contract)
+        factory_contract = web3.eth.contract(address=contract, abi=factory_abi)
+        return factory_contract.functions.getReserves().call()[1] * 10 ** -18
+    except:
+        return 0
 
 
 def get_diff(ath, closeUsd):
