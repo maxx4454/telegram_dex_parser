@@ -7,7 +7,7 @@ def get_timestamp(date):
     date, time = date.split('T')
     year, month, day = date.split('-')
     hour, minute, second = time.split(':')
-    hour = (int(hour) - 3) % 24
+    hour = (int(hour) + 3) % 24
     # print(year, month, day, hour, minute, second)
 
     second = datetime.datetime(int(year), int(month), int(day), hour, int(minute), int(second))
@@ -24,11 +24,18 @@ def find_num_by_index(index, text):
 
 def get_tokens():
     list_of_tokens = []
+    messages = []
 
 
     with open("hff_messages_20220613T001044.json", 'r') as f:
-        print(f.read())
-        messages = json.load(f)
+
+        try:
+
+            for i in json.load(f):
+                messages.append(i)
+
+        except Exception as e:
+            print('ya ebal')
 
     for msg in messages:
         try:
@@ -53,6 +60,8 @@ def get_tokens():
                     {"timestamp": timestamp, "pair": addr_pair, "token": addr_token, "pooled_weth": pooled_weth,
                      "fdv": fdv})
 
+
         except KeyError:
-            print(msg)
+            print('ya ebal')
+
     return list_of_tokens
