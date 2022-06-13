@@ -62,10 +62,12 @@ def insert_row(token, pair, volumes, ath, isRug, isHoneyPot, sell_tax, buy_tax, 
 
     # token, pair, volumes, ath, isRug, isHoneyPot, sell_tax, buy_tax, lp_pool, fdv, pooled_weth, timestamp,
     # peaks)
-    c.execute(''' INSERT INTO mem (token, pair, ath, timestamp, lp_pool, isRug, isHoneyPot, sell_tax, buy_tax, fdv, pooled_weth, volume_1, volume_2, volume_3, volume_4, volume_5, volume_6, volume_7, volume_8, volume_9, volume_10, volume_11, volume_12, volume_13, volume_14, volume_15, volume_1_5, volume_1_10, volume_1_15, volume_1_30, volume_1_60, to_peak_5, to_peak_10, to_peak_15)
-              VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ''', (
-    token, pair, ath, timestamp, lp_pool, isRug, isHoneyPot, sell_tax, buy_tax, fdv, pooled_weth, volumes[0],
-    volumes[1], volumes[2], volumes[3], volumes[4], volumes[5], volumes[6], volumes[7], volumes[8], volumes[9],
-    volumes[10], volumes[11], volumes[12], volumes[13], volumes[14], volume_1_5, volume_1_10, volume_1_15, volume_1_30, volume_1_60, peaks[4], peaks[9], peaks[14]))
-
+    try:
+        c.execute(''' INSERT INTO mem (token, pair, ath, timestamp, lp_pool, isRug, isHoneyPot, sell_tax, buy_tax, fdv, pooled_weth, volume_1, volume_2, volume_3, volume_4, volume_5, volume_6, volume_7, volume_8, volume_9, volume_10, volume_11, volume_12, volume_13, volume_14, volume_15, volume_1_5, volume_1_10, volume_1_15, volume_1_30, volume_1_60, to_peak_5, to_peak_10, to_peak_15)
+                  VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ''', (
+        token, pair, ath, timestamp, lp_pool, isRug, isHoneyPot, sell_tax, buy_tax, fdv, pooled_weth, volumes[0],
+        volumes[1], volumes[2], volumes[3], volumes[4], volumes[5], volumes[6], volumes[7], volumes[8], volumes[9],
+        volumes[10], volumes[11], volumes[12], volumes[13], volumes[14], volume_1_5, volume_1_10, volume_1_15, volume_1_30, volume_1_60, peaks[4], peaks[9], peaks[14]))
+    except OverflowError:
+        pass
     conn.commit()

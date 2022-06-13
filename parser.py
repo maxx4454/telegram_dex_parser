@@ -197,19 +197,25 @@ def get_liq_pool(contract):
 
 
 def get_diff(ath, closeUsd):
-    return int(((float(ath) / float(closeUsd)) - 1) * 100)
+    try:
+        return int(((float(ath) / float(closeUsd)) - 1) * 100)
+    except ZeroDivisionError:
+        return 0
 
 
 def get_ath(time0, contract):
-    tim1 = str(int(time0) + 360000000)
-    url = base + contract + "?from=" + time0 + "&to=" + tim1 + "&res=360000&cb=301"
-    bars = requests.get(url, headers=headers).json()['bars']
-    # print(url, bars)
-    ath = bars[0]['highUsd']
-    start = bars[0]['openUsd']
-    timestamp_start = bars[0]['timestamp']
+    try:
+        tim1 = str(int(time0) + 360000000)
+        url = base + contract + "?from=" + time0 + "&to=" + tim1 + "&res=360000&cb=301"
+        bars = requests.get(url, headers=headers).json()['bars']
+        # print(url, bars)
+        ath = bars[0]['highUsd']
+        start = bars[0]['openUsd']
+        timestamp_start = bars[0]['timestamp']
 
-    return {"start": start, "ath": ath, 'timestamp': timestamp_start}
+        return {"start": start, "ath": ath, 'timestamp': timestamp_start}
+    except:
+        return  {"start": 1, "ath": 1, 'timestamp': 0}
 
 
 def get_info_hour(time0, contract):
