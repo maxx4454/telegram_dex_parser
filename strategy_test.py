@@ -102,6 +102,8 @@ def test_strat():
     print(maxx, "mode0")
 
 
+
+
 test_strat()
 
 
