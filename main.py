@@ -9,7 +9,6 @@ from datetime import datetime
 # {"scam": False, "isRug": isRug, "sellTax": sellTax, "buyTax": buyTax, "lp_pool": lp_pool}
 
 def process_token(token_inf):
-
     token = token_inf['token']
     pooled_weth = token_inf['pooled_weth']
     fdv = token_inf['fdv']
